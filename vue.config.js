@@ -13,6 +13,20 @@ module.exports = {
       .use("svg-sprite-loader")
       .loader("svg-sprite-loader")
       .options({ extract: false })
+      .end()
+      .use("svgo-loader")
+      .loader("svgo-loader")
+      .tap((options) => ({
+        ...options,
+        plugins: [
+          {
+            name: "removeAttrs",
+            params: {
+              attrs: "(fill|stroke)",
+            },
+          },
+        ],
+      }))
       .end();
     config
       .plugin("svg-sprite")
