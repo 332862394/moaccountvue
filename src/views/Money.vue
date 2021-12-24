@@ -24,14 +24,17 @@ import Tags from "@/components/Money/Tags.vue";
 import { Component } from "vue-property-decorator";
 @Component({
   components: { Tags, FormItem, Types, NumberPad },
-  computed: {
-    //会自动计算依赖，变量值一变就会跟着变，如果不用计算属性的话，那就只会在一开始调用一次，以后变量变了，也不会再变了。
-    recordList() {
-      return this.$store.state.recordList;
-    },
-  },
+  // computed: {
+  //   //会自动计算依赖，变量值一变就会跟着变，如果不用计算属性的话，那就只会在一开始调用一次，以后变量变了，也不会再变了。
+  //   recordList() {
+  //     return this.$store.state.recordList;
+  //   },
+  // },
 })
 export default class Money extends Vue {
+  get recordList() {
+    return this.$store.state.recordList;
+  }
   record: RecordItem = { tags: [], notes: "", type: "-", amount: 20 };
   created() {
     this.$store.commit("fetchRecords");
