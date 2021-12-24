@@ -18,20 +18,21 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-
-@Component({ components: { Button } })
-export default class Labels extends Vue {
-  //TODO
-  tags = [];
-  createTag() {
-    const name = window.prompt("请输出标签名");
-    if (name) {
-      //TODO
-      // store.createTag(name);
-    }
+import { mixins } from "vue-class-component";
+import TagHelper from "@/mixins/TagHelper";
+@Component({
+  components: { Button },
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
+    },
+  },
+})
+export default class Labels extends mixins(TagHelper) {
+  created() {
+    this.$store.commit("fetchTags");
   }
 }
 </script>
