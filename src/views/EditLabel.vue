@@ -32,29 +32,20 @@ export default class EditLabel extends Vue {
     return this.$store.state.currentTag;
   }
   created() {
-    //TODO
+    this.$store.commit("fetchTags");
     this.$store.commit("setCurrentTag", this.$route.params.id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   update(name: string) {
-    console.log(name);
     if (this.tag) {
-      //TODO
-      // store.updateTag(this.tag.id, name);
+      this.$store.commit("updateTag", { id: this.tag.id, name });
     }
   }
   remove() {
     if (this.tag) {
-      //TODO
-      return;
-      // store.removeTag(this.tag.id);
-      // if (store.removeTag(this.tag.id)) {
-      //   this.$router.back();
-      // } else {
-      //   window.alert("删除失败");
-      // }
+      this.$store.commit("removeTag", this.tag.id);
     }
   }
   goBack() {
