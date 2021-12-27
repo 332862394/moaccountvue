@@ -4,6 +4,12 @@
     <Tab :data-source="recordTypeList" :value.sync="record.type" />
     <div class="notes">
       <FormItem
+        fileName="日期"
+        type="date"
+        :value.sync="record.createdAt"
+        placeholder="在这里输入日期"
+      />
+      <FormItem
         fileName="备注"
         :value.sync="record.notes"
         placeholder="在这里输入备注"
@@ -37,7 +43,13 @@ export default class Money extends Vue {
     return this.$store.state.recordList;
   }
   recordTypeList = recordTypeList;
-  record: RecordItem = { tags: [], notes: "", type: "-", amount: 20 };
+  record: RecordItem = {
+    tags: [],
+    notes: "",
+    type: "-",
+    amount: 0,
+    createdAt: new Date().toISOString(),
+  };
   created() {
     this.$store.commit("fetchRecords");
   }
