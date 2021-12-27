@@ -31,12 +31,36 @@ import recordTypeList from "@/constants/recordTypeList";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
 import Chart from "@/components/Chart.vue";
+import _ from "lodash";
+import day from "dayjs";
 @Component({ components: { Tab, Chart } })
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
     return tags.length === 0 ? "无" : tags.map((t) => t.name).join(",");
   }
+  get y() {
+    const today = new Date();
+    const array = [];
+    for (let i = 0; i <= 29; i++) {
+      const dateString = day(today).subtract(i, "day").format("YYYY-MM-DD");
+      const found = _.find(this.recordList, { createdAt: dateString });
+      array.push({ date: dateString, value: found ? found.amount : 0 });
+    }
+    console.log(array);
+    array.sort((a, b) => {
+      if (a.date > b.date) {
+        return 1;
+      } else if (a.date === b.date) {
+        return 0;
+      } else {
+        return -1;
+      }
+    });
+    return array;
+  }
   get x() {
+    const keys = this.y.map((item) => item.date);
+    const values = this.y.map((item) => item.value);
     return {
       grid: {
         left: 0,
@@ -44,36 +68,7 @@ export default class Statistics extends Vue {
       },
       xAxis: {
         type: "category",
-        data: [
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-        ],
+        data: keys,
         axisTick: { alignWithLabel: true },
         axisLine: { lineStyle: { color: "#666" } },
       },
@@ -86,11 +81,7 @@ export default class Statistics extends Vue {
           symbol: "circle",
           symbolSize: 10,
           itemStyle: { borderWidth: 1, color: "#666", borderColor: "#666" },
-          data: [
-            820, 932, 901, 934, 1290, 1330, 1320, 820, 932, 901, 934, 1290,
-            1330, 1320, 820, 932, 901, 934, 1290, 1330, 1320, 820, 932, 901,
-            934, 1290, 1330, 1320,
-          ],
+          data: values,
           type: "line",
         },
       ],
@@ -156,8 +147,6 @@ export default class Statistics extends Vue {
     }
     result.map((group) => {
       group.total = group.items.reduce((sum, item) => {
-        console.log(sum);
-        console.log(item);
         return sum + item.amount;
       }, 0);
     });
