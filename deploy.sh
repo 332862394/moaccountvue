@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+#!/usr/bin/env bash
+
 # 当发生错误时中止脚本
 set -e
 
@@ -23,3 +25,4 @@ git commit -m 'deploy'
 git push -f git@github.com:332862394/moaccountvue-website.git master:gh-pages
 
 cd -
+echo https://332862394.github.io/moaccountvue-website/
