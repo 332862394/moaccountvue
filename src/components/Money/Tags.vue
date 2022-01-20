@@ -63,8 +63,16 @@ export default class Tags extends mixins(TagHelper) {
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;
+      color: #333;
       &.selected {
-        background: darken($bg, 50%);
+        background-image: linear-gradient(
+          to right top,
+          #39c4eb,
+          #00b1e7,
+          #009ce2,
+          #0087d9,
+          #2b71cc
+        );
         color: white;
       }
     }

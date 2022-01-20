@@ -35,6 +35,7 @@ nav {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: #aaa;
     .icon {
       width: 32px;
       height: 32px;

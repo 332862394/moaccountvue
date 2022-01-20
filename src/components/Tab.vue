@@ -35,7 +35,15 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 .tabs {
-  background: #c4c4c4;
+  background-image: linear-gradient(
+    to right top,
+    #39c4eb,
+    #00b1e7,
+    #009ce2,
+    #0087d9,
+    #2b71cc
+  );
+  color: white;
   display: flex;
   text-align: center;
   font-size: 24px;
@@ -53,7 +61,7 @@ export default class extends Vue {
       left: 0;
       width: 100%;
       height: 4px;
-      background: #333;
+      background: white;
     }
   }
 }

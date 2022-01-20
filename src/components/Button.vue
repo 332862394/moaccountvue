@@ -11,7 +11,14 @@ export default class Button extends Vue {}
 
 <style lang="scss" scoped>
 .button {
-  background: #767676;
+  background-image: linear-gradient(
+    to right top,
+    #39c4eb,
+    #00b1e7,
+    #009ce2,
+    #0087d9,
+    #2b71cc
+  );
   color: white;
   border-radius: 4px;
   border: none;

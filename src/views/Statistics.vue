@@ -172,13 +172,13 @@ export default class Statistics extends Vue {
 }
 ::v-deep {
   .type-tabs-item {
-    background: #c4c4c4;
-    &.selected {
+    background: #2b71cc;
+    /* &.selected {
       background: white;
       &::after {
         display: none;
       }
-    }
+    } */
   }
   .interval-tabs-item {
     height: 48px;
